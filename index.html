@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHAWSHANK DEDUCTION</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Jost:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css?v=9" />
+</head>
+<body>
+  <!-- STATIONARY TOP HEADER: 3-LINE SIDEBAR BUTTON ALL THE WAY ON THE LEFT -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <button
+          type="button"
+          id="sidebar-toggle-btn"
+          class="hamburger-btn"
+          aria-label="Toggle Shawshank Deduction Game Modes Sidebar"
+          aria-expanded="false"
+          title="Game Modes"
+        >
+          <span class="hamburger-icon" aria-hidden="true">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </span>
+        </button>
+
+        <div class="brand-lockup" id="brand-home-trigger" role="button" tabindex="0">
+          <h1 class="site-title">SHAWSHANK DEDUCTION</h1>
+        </div>
+      </div>
+
+      <nav class="section-switch" aria-label="Catalog Section">
+        <button type="button" class="section-btn active" data-section="movies">MOVIES</button>
+        <button type="button" class="section-btn" data-section="tv">TV SHOWS</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- POP-OUT LEFT SIDEBAR: CLICK THE SAME 3-LINE BUTTON AGAIN TO CLOSE -->
+  <div id="sidebar-backdrop" class="sidebar-backdrop hidden"></div>
+  <aside id="modes-sidebar" class="modes-sidebar" aria-label="Shawshank Deduction Game Modes" aria-hidden="true">
+    <div class="sidebar-head">
+      <span class="sidebar-kicker">SHAWSHANK DEDUCTION · GAME MODES</span>
+    </div>
+
+    <div class="sidebar-modes-list">
+      <button type="button" id="sidebar-mode-ttt" class="sidebar-mode-item active-game">
+        <div class="sidebar-mode-top">
+          <strong class="sidebar-mode-name">3×3 Cinema Tic-Tac-Toe</strong>
+          <span class="sidebar-status-tag live-tag">PLAYING</span>
+        </div>
+        <p class="sidebar-mode-desc">
+          Deduce the exact film or television series that connects each row and column on the 3×3 board.
+        </p>
+      </button>
+
+      <div class="sidebar-mode-item coming-soon-game" aria-disabled="true">
+        <div class="sidebar-mode-top">
+          <strong class="sidebar-mode-name">Madame Web</strong>
+          <span class="sidebar-status-tag soon-tag">COMING SOON</span>
+        </div>
+        <p class="sidebar-mode-desc">
+          Unreleased web-of-connections cinema mode. Stay tuned for the premiere.
+        </p>
+      </div>
+    </div>
+
+    <div class="sidebar-foot">
+      <span>Click the 3-line icon in the top-left to close</span>
+    </div>
+  </aside>
+
+  <!-- ====================================================================
+       ENTRY SCREEN: WIDE FULL-VIEWPORT PLAYBILL & LIVE INTERSECTION DEMO
+       ==================================================================== -->
+  <section id="setup-screen" class="setup-screen">
+    <div class="setup-layout">
+      <!-- LEFT COLUMN: STEP-BY-STEP LEDGER MENU -->
+      <div class="setup-ledger-panel">
+        <!-- STEP 1: CHOOSE GAME MODE -->
+        <div id="wizard-step-mode" class="wizard-step">
+          <div class="ledger-header">
+            <span class="ledger-index">STEP 01 / 03</span>
+            <h2 class="ledger-title">Choose Game Mode</h2>
+            <p class="ledger-sub">Select how you want to play the 3×3 cinema grid.</p>
+          </div>
+
+          <div class="ledger-list">
+            <button type="button" class="ledger-row featured-row" data-wizard-mode="daily">
+              <span class="row-num">01</span>
+              <div class="row-main">
+                <strong class="row-title">Daily Grid</strong>
+                <span class="row-desc">Today's fixed 3×3 challenge (Medium-Hard). Same board for everyone today.</span>
+              </div>
+              <span class="row-tag">DAILY</span>
+            </button>
+
+            <button type="button" class="ledger-row" data-wizard-mode="solo">
+              <span class="row-num">02</span>
+              <div class="row-main">
+                <strong class="row-title">Single Player</strong>
+                <span class="row-desc">Play solo across unlimited randomized 3×3 boards with a 03:00 timer.</span>
+              </div>
+              <span class="row-tag">SOLO</span>
+            </button>
+
+            <button type="button" class="ledger-row" data-wizard-mode="pass">
+              <span class="row-num">03</span>
+              <div class="row-main">
+                <strong class="row-title">Same Screen</strong>
+                <span class="row-desc">Two players alternating turns head-to-head on one device.</span>
+              </div>
+              <span class="row-tag">LOCAL 2P</span>
+            </button>
+
+            <button type="button" class="ledger-row" data-wizard-mode="online">
+              <span class="row-num">04</span>
+              <div class="row-main">
+                <strong class="row-title">Multiplayer</strong>
+                <span class="row-desc">Create a private room link to challenge a friend on the exact same board.</span>
+              </div>
+              <span class="row-tag">INVITE</span>
+            </button>
+
+            <button type="button" class="ledger-row" data-wizard-mode="random">
+              <span class="row-num">05</span>
+              <div class="row-main">
+                <strong class="row-title">Random Online Opponent</strong>
+                <span class="row-desc">Jump into a live 1v1 grid match against a matched online rival.</span>
+              </div>
+              <span class="row-tag">LIVE 1V1</span>
+            </button>
+
+            <button type="button" class="ledger-row" data-wizard-mode="bot">
+              <span class="row-num">06</span>
+              <div class="row-main">
+                <strong class="row-title">Versus a Bot</strong>
+                <span class="row-desc">Compete head-to-head against our tactical Minimax Cinema Bot.</span>
+              </div>
+              <span class="row-tag">CPU</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: CHOOSE CATALOG POOL (Global / Hollywood / Animations) -->
+        <div id="wizard-step-scope" class="wizard-step hidden">
+          <div class="ledger-header">
+            <div class="ledger-nav-top">
+              <button type="button" id="back-to-step-mode" class="return-btn">Back to Modes</button>
+              <span class="ledger-index">STEP 02 / 03</span>
+            </div>
+            <h2 class="ledger-title">Choose Film Pool</h2>
+            <p class="ledger-sub">Animations are included naturally in Global, or choose a specific pool below.</p>
+          </div>
+
+          <div class="ledger-list">
+            <button type="button" class="ledger-row featured-row" data-wizard-scope="global">
+              <span class="row-num">01</span>
+              <div class="row-main">
+                <strong class="row-title">Global</strong>
+                <span class="row-desc">Complete cinema pool combining Hollywood, acclaimed world cinema, and animations.</span>
+              </div>
+              <span class="row-tag">GLOBAL</span>
+            </button>
+
+            <button type="button" class="ledger-row" data-wizard-scope="hollywood">
+              <span class="row-num">02</span>
+              <div class="row-main">
+                <strong class="row-title">Hollywood</strong>
+                <span class="row-desc">English-language Hollywood releases and animated blockbusters.</span>
+              </div>
+              <span class="row-tag">HOLLYWOOD</span>
+            </button>
+
+            <button type="button" class="ledger-row" data-wizard-scope="animations">
+              <span class="row-num">03</span>
+              <div class="row-main">
+                <strong class="row-title">Animations</strong>
+                <span class="row-desc">Strictly animated feature films and animated series.</span>
+              </div>
+              <span class="row-tag">ANIMATIONS</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: CHOOSE DIFFICULTY (Skipped on Daily Grid) -->
+        <div id="wizard-step-diff" class="wizard-step hidden">
+          <div class="ledger-header">
+            <div class="ledger-nav-top">
+              <button type="button" id="back-to-step-scope" class="return-btn">Back to Pool</button>
+              <span class="ledger-index">STEP 03 / 03</span>
+            </div>
+            <h2 class="ledger-title">Choose Difficulty</h2>
+            <p class="ledger-sub">All categories use recognizable actors, directors, awards, and film facts.</p>
+          </div>
+
+          <div class="ledger-list">
+            <button type="button" class="ledger-row" data-wizard-diff="easy">
+              <span class="row-num">01</span>
+              <div class="row-main">
+                <strong class="row-title">Easy</strong>
+                <span class="row-desc">Major stars, household directors, and iconic blockbusters.</span>
+              </div>
+              <span class="row-tag">EASY</span>
+            </button>
+
+            <button type="button" class="ledger-row featured-row" data-wizard-diff="medium">
+              <span class="row-num">02</span>
+              <div class="row-main">
+                <strong class="row-title">Medium</strong>
+                <span class="row-desc">Acclaimed filmmakers, top co-stars, and sharper intersections.</span>
+              </div>
+              <span class="row-tag">MEDIUM</span>
+            </button>
+
+            <button type="button" class="ledger-row" data-wizard-diff="hard">
+              <span class="row-num">03</span>
+              <div class="row-main">
+                <strong class="row-title">Hard</strong>
+                <span class="row-desc">Famous names paired in tight 1 to 2 movie intersections.</span>
+              </div>
+              <span class="row-tag">HARD</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: LIVE PRODUCT DEMO SLATE -->
+      <aside class="setup-demo-panel" aria-label="How the Grid Works">
+        <div class="demo-slate">
+          <div class="demo-slate-header">
+            <span class="demo-code">HOW TO PLAY</span>
+            <span class="demo-clock">03:00 TIMER</span>
+          </div>
+
+          <div class="demo-mini-grid">
+            <div class="demo-corner">
+              <span class="demo-crest-title">SHAWSHANK</span>
+              <span class="demo-crest-sub">3×3 GRID</span>
+            </div>
+            <div class="demo-axis">
+              <div class="cat-avatar-frame sm-avatar" data-person-name="Robert De Niro">
+                <span class="cat-avatar-initials">RD</span>
+                <img class="cat-avatar-img hidden" alt="Robert De Niro" />
+              </div>
+              <span class="demo-kicker">STARRING</span>
+              <strong>Robert De Niro</strong>
+            </div>
+            <div class="demo-axis">
+              <div class="cat-icon-badge-wrap sm-badge">
+                <svg class="cat-svg-icon trophy-svg" viewBox="0 0 64 64" fill="none">
+                  <circle cx="32" cy="12" r="5.5" fill="#F3E09C"/>
+                  <path d="M24 20C24 18.3 25.5 17 27.5 17H36.5C38.5 17 40 18.3 40 20L37.5 36L35.5 47H28.5L26.5 36L24 20Z" fill="#F3E09C"/>
+                  <rect x="19" y="51" width="26" height="6" rx="2" fill="#231D14" stroke="#F3E09C" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <span class="demo-kicker">ACADEMY AWARDS</span>
+              <strong>Won Best Picture</strong>
+            </div>
+
+            <div class="demo-axis">
+              <div class="cat-avatar-frame sm-avatar" data-person-name="Martin Scorsese">
+                <span class="cat-avatar-initials">MS</span>
+                <img class="cat-avatar-img hidden" alt="Martin Scorsese" />
+              </div>
+              <span class="demo-kicker">DIRECTED BY</span>
+              <strong>Martin Scorsese</strong>
+            </div>
+            <div class="demo-cell solved" data-demo-movie-id="769" data-demo-movie-title="GoodFellas">
+              <span class="demo-badge">✓ CORRECT</span>
+              <div class="cell-poster-frame sm-poster">
+                <div class="cell-poster-fallback"></div>
+                <img class="cell-poster-img hidden" alt="GoodFellas" />
+              </div>
+              <strong>GoodFellas</strong>
+            </div>
+            <div class="demo-cell solved" data-demo-movie-id="1422" data-demo-movie-title="The Departed">
+              <span class="demo-badge">✓ CORRECT</span>
+              <div class="cell-poster-frame sm-poster">
+                <div class="cell-poster-fallback"></div>
+                <img class="cell-poster-img hidden" alt="The Departed" />
+              </div>
+              <strong>The Departed</strong>
+            </div>
+
+            <div class="demo-axis">
+              <div class="cat-avatar-frame sm-avatar" data-person-name="Quentin Tarantino">
+                <span class="cat-avatar-initials">QT</span>
+                <img class="cat-avatar-img hidden" alt="Quentin Tarantino" />
+              </div>
+              <span class="demo-kicker">DIRECTED BY</span>
+              <strong>Quentin Tarantino</strong>
+            </div>
+            <div class="demo-cell solved" data-demo-movie-id="184" data-demo-movie-title="Jackie Brown">
+              <span class="demo-badge">✓ CORRECT</span>
+              <div class="cell-poster-frame sm-poster">
+                <div class="cell-poster-fallback"></div>
+                <img class="cell-poster-img hidden" alt="Jackie Brown" />
+              </div>
+              <strong>Jackie Brown</strong>
+            </div>
+            <div class="demo-cell open">
+              <span class="demo-coord">SELECT</span>
+            </div>
+          </div>
+
+          <div class="demo-rules-list">
+            <div class="demo-rule-item">
+              <span class="rule-idx">01</span>
+              <span>Name a film or series that connects both the Row and Column criteria.</span>
+            </div>
+            <div class="demo-rule-item">
+              <span class="rule-idx">02</span>
+              <span>Close misspellings (like "Synecdokhe" or "Mickey 18") prompt a "Did you mean...?" check.</span>
+            </div>
+            <div class="demo-rule-item">
+              <span class="rule-idx">03</span>
+              <span>Three minutes (03:00) on the clock for the entire 3×3 board.</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       ACTIVE GAME STAGE: FULL-WIDTH 2-COLUMN STUDIO WORKSPACE
+       ==================================================================== -->
+  <main id="game-stage" class="main-stage hidden">
+    <div class="stage-workspace">
+      <!-- LEFT COMMAND WING: SCOREBOARD, MODES, POOL, DIFFICULTY & ACTIONS -->
+      <aside class="stage-left-wing">
+        <!-- 1V1 DUEL SCOREBOARD -->
+        <section id="duel-scoreboard" class="scoreboard hidden">
+          <div id="score-card-x" class="player-card player-x active-turn">
+            <span class="player-badge">X</span>
+            <div class="player-info">
+              <span id="player-x-name" class="player-label">PLAYER 1</span>
+              <span class="player-turn-indicator">ACTIVE TURN</span>
+            </div>
+            <strong id="score-x-val" class="player-pts">0</strong>
+          </div>
+
+          <div class="scoreboard-center">
+            <div id="duel-timer-display" class="turn-clock">03:00</div>
+            <button type="button" id="skip-turn-btn" class="skip-link">Pass Turn</button>
+          </div>
+
+          <div id="score-card-o" class="player-card player-o">
+            <strong id="score-o-val" class="player-pts">0</strong>
+            <div class="player-info align-right">
+              <span id="player-o-name" class="player-label">PLAYER 2</span>
+              <span class="player-turn-indicator">ACTIVE TURN</span>
+            </div>
+            <span class="player-badge">O</span>
+          </div>
+        </section>
+
+        <!-- SOLO / DAILY STATUS BAR (03:00 TIMER · NO GUESSES COUNTER) -->
+        <section id="solo-scoreboard" class="solo-strip">
+          <div class="solo-metrics">
+            <span id="solo-timer-display" class="metric-pill gold-outline-pill">03:00</span>
+            <span id="solo-filled-pill" class="metric-pill">0 / 9 SOLVED</span>
+          </div>
+          <div id="ttt-status-banner" class="solo-status-text">Select any square on the grid to enter a title.</div>
+        </section>
+
+        <!-- CONTROL DECK -->
+        <section class="control-deck">
+          <div class="wing-section-block">
+            <span class="wing-label">GAME MODE</span>
+            <div class="mode-pills" role="tablist" aria-label="Game Mode">
+              <button type="button" class="mode-pill" data-mode="daily">Daily Grid</button>
+              <button type="button" class="mode-pill" data-mode="solo">Single Player</button>
+              <button type="button" class="mode-pill" data-mode="pass">Same Screen</button>
+              <button type="button" class="mode-pill" data-mode="online">Multiplayer</button>
+              <button type="button" class="mode-pill" data-mode="random">Random Online</button>
+              <button type="button" class="mode-pill" data-mode="bot">vs. Bot</button>
+            </div>
+          </div>
+
+          <!-- DIFFICULTY, POOL & REVEAL ANSWERS CONTROLS (HIDDEN IN DAILY GRID) -->
+          <div id="custom-controls-row" class="sub-controls hidden">
+            <div class="wing-section-block">
+              <span class="wing-label">FILM POOL</span>
+              <div class="scope-selector" role="group" aria-label="Catalog Scope">
+                <button type="button" class="scope-btn active" data-scope="global">Global</button>
+                <button type="button" class="scope-btn" data-scope="hollywood">Hollywood</button>
+                <button type="button" class="scope-btn" data-scope="animations">Animations</button>
+              </div>
+            </div>
+
+            <div class="wing-section-block">
+              <span class="wing-label">DIFFICULTY</span>
+              <div class="diff-selector" role="group" aria-label="Difficulty">
+                <button type="button" class="diff-btn" data-diff="easy">Easy</button>
+                <button type="button" class="diff-btn" data-diff="medium">Medium</button>
+                <button type="button" class="diff-btn" data-diff="hard">Hard</button>
+              </div>
+            </div>
+
+            <div class="deck-actions">
+              <button type="button" id="ttt-new-board-btn" class="action-btn gold-btn full-btn">New Board</button>
+              <div class="deck-actions-row">
+                <button type="button" id="reveal-board-btn" class="action-btn ghost-btn">Reveal Answers</button>
+                <button type="button" id="open-setup-btn" class="action-btn ghost-btn">Main Menu</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- DAILY GRID INFO BAR (Only visible in Daily Grid — NO Reveal Answers, NO Difficulty) -->
+          <div id="daily-info-bar" class="context-bar hidden">
+            <div class="context-left">
+              <span class="context-index">DAILY</span>
+              <span id="daily-date-label" class="context-title">DAILY CHALLENGE</span>
+            </div>
+            <div class="context-right">
+              <span id="daily-countdown" class="countdown-label">Next grid in --:--:--</span>
+              <button type="button" id="daily-setup-btn" class="action-btn ghost-btn sm-btn">Main Menu</button>
+            </div>
+          </div>
+
+          <!-- MULTIPLAYER FRIEND INVITE BAR (Only visible in Multiplayer mode) -->
+          <div id="friend-invite-bar" class="context-bar invite-bar hidden">
+            <div class="context-left">
+              <span class="context-index">INVITE</span>
+              <span class="context-title">Challenge a friend on this board:</span>
+            </div>
+            <div class="context-right">
+              <button type="button" id="copy-invite-link-btn" class="action-btn gold-btn sm-btn">
+                Copy Invite Link
+              </button>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <!-- RIGHT MAIN ARENA: THE 3x3 ARCHITECTURAL GRID -->
+      <section class="stage-grid-arena">
+        <div id="ttt-grid" class="ttt-grid"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ====================================================================
+       DIRECT ANSWER SUBMISSION MODAL (WITH "DID YOU MEAN...?" CHECK)
+       ==================================================================== -->
+  <div id="search-modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <span id="modal-cell-coord" class="modal-kicker">SQUARE R1·C1</span>
+          <h2 id="search-modal-title" class="modal-title">Category × Category</h2>
+          <p id="search-modal-subtitle" class="modal-subtitle">
+            Type the title and press Return.
+          </p>
+        </div>
+      </div>
+
+      <form id="answer-submit-form" class="answer-form" autocomplete="off">
+        <input
+          type="text"
+          id="movie-search-input"
+          class="search-input"
+          placeholder="Type title here..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <div class="answer-form-actions">
+          <button type="button" id="cancel-answer-btn" class="action-btn ghost-btn">Cancel</button>
+          <button type="submit" id="submit-answer-btn" class="action-btn gold-btn">Submit Answer</button>
+        </div>
+      </form>
+
+      <!-- SKELETON LOADER WHILE VERIFYING TITLE -->
+      <div id="verify-skeleton" class="skeleton-box hidden" aria-hidden="true">
+        <div class="skeleton-line lg"></div>
+        <div class="skeleton-line sm"></div>
+      </div>
+
+      <!-- CONDITIONAL "DID YOU MEAN...?" PROMPT (NO RELEASE YEAR SHOWN) -->
+      <div id="did-you-mean-box" class="did-you-mean-box hidden">
+        <p class="dym-text">
+          Did you mean <strong id="dym-title-text"></strong>?
+        </p>
+        <div class="dym-actions">
+          <button type="button" id="dym-accept-btn" class="action-btn gold-btn sm-btn">
+            Yes
+          </button>
+          <button type="button" id="dym-reject-btn" class="action-btn ghost-btn sm-btn">
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- "REVEAL ANSWERS" CONFIRMATION MODAL ("Are you sure you want to reveal all the answers?" Yes / No) -->
+  <div id="reveal-confirm-modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <span class="modal-kicker">CONFIRMATION</span>
+          <h2 class="modal-title">Are you sure you want to reveal all the answers?</h2>
+          <p class="modal-subtitle">
+            This will complete all remaining squares on the current 3×3 grid.
+          </p>
+        </div>
+      </div>
+      <div class="answer-form-actions">
+        <button type="button" id="confirm-reveal-no-btn" class="action-btn ghost-btn">No</button>
+        <button type="button" id="confirm-reveal-yes-btn" class="action-btn gold-btn">Yes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TERMS OF SERVICE & PRIVACY POLICY MODAL -->
+  <div id="legal-modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <span id="legal-modal-kicker" class="modal-kicker">LEGAL NOTICE</span>
+          <h2 id="legal-modal-title" class="modal-title">Terms of Service</h2>
+        </div>
+        <button type="button" id="close-legal-modal" class="action-btn ghost-btn sm-btn">Close</button>
+      </div>
+      <div id="legal-modal-body" class="legal-body"></div>
+    </div>
+  </div>
+
+  <!-- AUTO-DISMISSING POP-UP BANNER (NO 'X' BUTTON) -->
+  <div id="feedback-popup" class="feedback-popup hidden" role="status" aria-live="polite"></div>
+
+  <!-- EDITORIAL FOOTER WITH TOS & PRIVACY POLICY -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">SHAWSHANK DEDUCTION · THE 3×3 CINEMA &amp; TELEVISION GRID</span>
+      <nav class="footer-links" aria-label="Legal">
+        <button type="button" id="open-tos-btn" class="footer-link-btn">Terms of Service</button>
+        <button type="button" id="open-privacy-btn" class="footer-link-btn">Privacy Policy</button>
+      </nav>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/app.js?v=9"></script>
+</body>
+</html>
